@@ -96,6 +96,7 @@ describe "A stubbed class method" do
   it "should return the original result after a reset" do
     NotAMock::Stubber.instance.reset
     Time.now.should_not == 42
+    puts Time.now
   end
 
   after do
@@ -119,17 +120,17 @@ describe "A stubbed private method" do
   end
   
   it "should return the stubbed result" do
-    Privateer.send(:stubbed).should be_true
+    Privateer.send("stubbed").should be_true
   end
   
   it "should return the original result after stubbing is removed" do
     Privateer.unstub_method(:stubbed)
-    Privateer.send(:stubbed).should be_false
+    Privateer.send("stubbed").should be_false
   end
   
   it "should return the original result after a reset" do
     NotAMock::Stubber.instance.reset
-    Privateer.send(:stubbed).should be_false
+    Privateer.send("stubbed").should be_false
   end
 
   after do
